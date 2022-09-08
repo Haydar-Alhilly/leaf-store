@@ -19,8 +19,8 @@ class _HomePageState extends State<HomePage> {
   int activeIndex = 0;
 
   Widget buildCard(String imageLogo) => Container(
-        width: 120,
-        height: 120,
+        width: 70,
+        height: 70,
         margin: EdgeInsets.symmetric(horizontal: 10),
         decoration: BoxDecoration(
           color: Colors.purple.shade300,
@@ -81,13 +81,13 @@ class _HomePageState extends State<HomePage> {
   ];
 
   Widget buildVerticalCard(verticalImage) => Container(
-        width: 220,
-        height: 400,
+        width: MediaQuery.of(context).size.width,
+        height: 250,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
           color: Colors.pink,
           image: DecorationImage(
-              image: NetworkImage(verticalImage), fit: BoxFit.fitHeight),
+              image: NetworkImage(verticalImage), fit: BoxFit.fitWidth),
         ),
       );
 
@@ -130,7 +130,23 @@ class _HomePageState extends State<HomePage> {
       ),
       body: SingleChildScrollView(
         child: Column(children: [
-          heightSpace(10),
+          heightSpace(15),
+          SizedBox(
+            width: 500,
+            height: 100,
+            child: ListView(scrollDirection: Axis.horizontal, children: [
+              buildCard(imagesLogo[0]),
+              buildCard(imagesLogo[1]),
+              buildCard(imagesLogo[2]),
+              buildCard(imagesLogo[3]),
+              buildCard(imagesLogo[4]),
+              buildCard(imagesLogo[5]),
+              buildCard(imagesLogo[6]),
+            ]),
+          ),
+          heightSpace(25),
+          buildVerticalCard(verticalCardImage[0]),
+          heightSpace(25),
           CarouselSlider.builder(
             itemCount: urlImages.length,
             itemBuilder: (context, index, realIndex) {
@@ -147,40 +163,15 @@ class _HomePageState extends State<HomePage> {
           heightSpace(20),
           buildIndicator(), //function for the dots under the images
           heightSpace(25),
-          SizedBox(
-            width: 500,
-            height: 100,
-            child: ListView(scrollDirection: Axis.horizontal, children: [
-              buildCard(imagesLogo[0]),
-              buildCard(imagesLogo[1]),
-              buildCard(imagesLogo[2]),
-              buildCard(imagesLogo[3]),
-              buildCard(imagesLogo[4]),
-              buildCard(imagesLogo[5]),
-              buildCard(imagesLogo[6]),
-            ]),
-          ),
-          heightSpace(50),
-          Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-            widthSpace(10),
-            buildVerticalCard(verticalCardImage[0]),
-            widthSpace(20),
-            buildVerticalCard(verticalCardImage[1]),
-          ]),
-          heightSpace(20),
-          Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-            widthSpace(10),
-            buildVerticalCard(verticalCardImage[2]),
-            widthSpace(20),
-            buildVerticalCard(verticalCardImage[3]),
-          ]),
-          heightSpace(20),
-          Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-            widthSpace(10),
-            buildVerticalCard(verticalCardImage[4]),
-            widthSpace(20),
-            buildVerticalCard(verticalCardImage[5]),
-          ]),
+          buildVerticalCard(verticalCardImage[1]),
+          heightSpace(15),
+          buildVerticalCard(verticalCardImage[2]),
+          heightSpace(15),
+          buildVerticalCard(verticalCardImage[3]),
+          heightSpace(15),
+          buildVerticalCard(verticalCardImage[4]),
+          heightSpace(15),
+          buildVerticalCard(verticalCardImage[5]),
           heightSpace(10),
         ]),
       ),
